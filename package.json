@@ -1,0 +1,10 @@
+{
+    "name": "gf_custom_javascript",
+    "version": "0.1.0",
+    "devDependencies": {
+        "grunt": "*",
+        "matchdep": "*",
+        "grunt-po2mo": "*",
+        "grunt-wp-i18n": "*"
+    }
+}

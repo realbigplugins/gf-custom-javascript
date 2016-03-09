@@ -1,0 +1,72 @@
+# Copyright (C) 2016 Eric Defore
+# This file is distributed under the GPL2.
+msgid ""
+msgstr ""
+"Project-Id-Version: Gravity Forms: Custom JavaScript on Submission 0.1\n"
+"Report-Msgid-Bugs-To: "
+"https://wordpress.org/support/plugin/gf-custom-javascript\n"
+"POT-Creation-Date: 2016-03-09 17:51:30+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"X-Generator: grunt-wp-i18n 0.5.4\n"
+
+#. Plugin Name of the plugin/theme
+msgid "Gravity Forms: Custom JavaScript on Submission"
+msgstr ""
+
+#: gf-custom-javascript.php:40
+msgid "Custom JavaScript"
+msgstr ""
+
+#: gf-custom-javascript.php:54
+msgid "This script only runs on this Form"
+msgstr ""
+
+#: gf-custom-javascript.php:55
+msgid "This script runs on every Form"
+msgstr ""
+
+#: gf-custom-javascript.php:115 gf-custom-javascript.php:133
+msgid "Custom JavaScript on Form Submission"
+msgstr ""
+
+#: gf-custom-javascript.php:118
+msgid ""
+"Custom JavaScript Specific to this Form.<br /><br />If using jQuery, <a "
+"href=\"https://learn.jquery.com/using-jquery-core/avoid-conflicts-other-"
+"libraries/#use-an-immediately-invoked-function-expression\">be sure to put "
+"it in a immediately invoked function expression!</a>"
+msgstr ""
+
+#: gf-custom-javascript.php:121 gf-custom-javascript.php:139
+msgid ""
+"&lt; script &gt; tags are not necessary, but they can be used to enclose "
+"your JavaScript and add HTML elements if you're inclined to (Like for a "
+"\"Tracking Pixel\" within a &lt; noscript &gt; tag)"
+msgstr ""
+
+#: gf-custom-javascript.php:136
+msgid ""
+"Custom JavaScript for Every Form.<br /><br />If using jQuery, <a "
+"href=\"https://learn.jquery.com/using-jquery-core/avoid-conflicts-other-"
+"libraries/#use-an-immediately-invoked-function-expression\">be sure to put "
+"it in a immediately invoked function expression!</a>"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"This plugin injects custom JavaScript on gform_after_submission per form or "
+"globally"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Eric Defore"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://realbigplugins.com"
+msgstr ""

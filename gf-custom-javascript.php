@@ -5,6 +5,7 @@ Description: This plugin injects custom JavaScript on gform_after_submission per
 Author: Eric Defore
 Author URI: http://realbigplugins.com
 Version: 0.1
+Text Domain: gf-custom-javascript
 License: GPL2
 */
 
@@ -19,8 +20,6 @@ if ( ( ! class_exists( 'Gravity_Forms_Custom_JavaScript' ) ) && ( class_exists( 
         protected $_slug = 'gf-custom-javascript';
         protected $_path = 'gf-custom-javascript/gf-custom-javascript.php';
         protected $_full_path = __FILE__;
-        protected $_title = 'Gravity Forms: Custom JavaScript on Submission';
-        protected $_short_title = 'Custom JavaScript';
         
         // Members plugin integration
         protected $_capabilities = array( 'gravityforms_custom_javascript', 'gravityforms_custom_javascript_uninstall' );
@@ -31,8 +30,17 @@ if ( ( ! class_exists( 'Gravity_Forms_Custom_JavaScript' ) ) && ( class_exists( 
         protected $_capabilities_uninstall = 'gravityforms_custom_javascript_uninstall';
 
         public function init(){
+            
             parent::init();
-            add_action( 'gform_after_submission', array( $this, 'inject_scripts'), 10, 2);
+            
+            $this->load_textdomain();
+            
+            // The only way to translate these Strings is to set them this way.
+            $this->_title = __( 'Gravity Forms: Custom JavaScript on Submission', 'gf-custom-javascript' );
+            $this->_short_title = __( 'Custom JavaScript', 'gf-custom-javascript' );
+            
+            add_action( 'gform_after_submission', array( $this, 'inject_scripts' ), 10, 2 );
+            
         }
 
         public function inject_scripts( $entry, $form ) {
@@ -43,8 +51,8 @@ if ( ( ! class_exists( 'Gravity_Forms_Custom_JavaScript' ) ) && ( class_exists( 
             // Global
             $plugin_settings = $this->get_plugin_settings();
             
-            $this->clean_script( $form_settings, 'This script only runs on this Form' );
-            $this->clean_script( $plugin_settings, 'This script runs on every Form' );
+            $this->clean_script( $form_settings, __( 'This script only runs on this Form', 'gf-custom-javascript' ) );
+            $this->clean_script( $plugin_settings, __( 'This script runs on every Form', 'gf-custom-javascript' ) );
             
         }
         
@@ -76,7 +84,7 @@ if ( ( ! class_exists( 'Gravity_Forms_Custom_JavaScript' ) ) && ( class_exists( 
                 ?>
 
                 <script type = "text/javascript">
-                    // Gravity Forms: Custom JavaScript on Submission
+                    // <?php _e( 'Gravity Forms: Custom JavaScript on Submission', 'gf-custom-javascript' ); ?>
                     // <?php echo "$message\n" ?>
                     <?php echo $settings['gf_custom_javascript']; ?>
                 </script>
@@ -104,13 +112,13 @@ if ( ( ! class_exists( 'Gravity_Forms_Custom_JavaScript' ) ) && ( class_exists( 
         public function form_settings_fields( $form ) {
             return array(
                 array(
-                    'title'  => 'Custom JavaScript on Form Submission',
+                    'title'  => __( 'Custom JavaScript on Form Submission', 'gf-custom-javascript' ),
                     'fields' => array(
                         array(
-                            'label'   => 'Custom JavaScript Specific to this Form.<br /><br />If using jQuery, <a href="https://learn.jquery.com/using-jquery-core/avoid-conflicts-other-libraries/#use-an-immediately-invoked-function-expression">be sure to put it in a immediately invoked function expression!</a>',
+                            'label'   => __( 'Custom JavaScript Specific to this Form.<br /><br />If using jQuery, <a href="https://learn.jquery.com/using-jquery-core/avoid-conflicts-other-libraries/#use-an-immediately-invoked-function-expression">be sure to put it in a immediately invoked function expression!</a>', 'gf-custom-javascript'),
                             'type'    => 'textarea',
                             'name'    => 'gf_custom_javascript',
-                            'tooltip' => '&lt; script &gt; tags are not necessary, but they can be used to enclose your JavaScript and add HTML elements if you\'re inclined to (Like for a "Tracking Pixel" within a &lt; noscript &gt; tag)',
+                            'tooltip' => __( '&lt; script &gt; tags are not necessary, but they can be used to enclose your JavaScript and add HTML elements if you\'re inclined to (Like for a "Tracking Pixel" within a &lt; noscript &gt; tag)', 'gf-custom-javascript' ),
                             'class'   => 'medium mt-position-right',
                         ),
                     ),
@@ -122,22 +130,54 @@ if ( ( ! class_exists( 'Gravity_Forms_Custom_JavaScript' ) ) && ( class_exists( 
         public function plugin_settings_fields() {
             return array(
                 array(
-                    'title'  => 'Custom JavaScript on Form Submission',
+                    'title'  => __( 'Custom JavaScript on Form Submission', 'gf-custom-javascript' ),
                     'fields' => array(
                         array(
-                            'label'   => 'Custom JavaScript for Every Form.<br /><br />If using jQuery, <a href="https://learn.jquery.com/using-jquery-core/avoid-conflicts-other-libraries/#use-an-immediately-invoked-function-expression">be sure to put it in a immediately invoked function expression!</a>',
+                            'label'   => __( 'Custom JavaScript for Every Form.<br /><br />If using jQuery, <a href="https://learn.jquery.com/using-jquery-core/avoid-conflicts-other-libraries/#use-an-immediately-invoked-function-expression">be sure to put it in a immediately invoked function expression!</a>', 'gf-custom-javascript' ),
                             'type'    => 'textarea',
                             'name'    => 'gf_custom_javascript',
-                            'tooltip' => '&lt; script &gt; tags are not necessary, but they can be used to enclose your JavaScript and add HTML elements if you\'re inclined to (Like for a "Tracking Pixel" within a &lt; noscript &gt; tag)',
+                            'tooltip' => __( '&lt; script &gt; tags are not necessary, but they can be used to enclose your JavaScript and add HTML elements if you\'re inclined to (Like for a "Tracking Pixel" within a &lt; noscript &gt; tag)', 'gf-custom-javascript' ),
                             'class'   => 'medium mt-position-right',
                         ),
                     ),
                 ),
             );
         }
+    
+        private function load_textdomain() {
+
+            // Set filter for language directory
+            $lang_dir = dirname( plugin_basename( __FILE__ ) ) . '/languages/';
+            $lang_dir = apply_filters( 'gf_custom_javascript_languages_directory', $lang_dir );
+
+            // Traditional WordPress plugin locale filter
+            $locale = apply_filters( 'plugin_locale', get_locale(), 'gf-custom-javascript' );
+            $mofile = sprintf( '%1$s-%2$s.mo', 'gf-custom-javascript', $locale );
+
+            // Setup paths to current locale file
+            $mofile_local   = $lang_dir . $mofile;
+            $mofile_global  = WP_LANG_DIR . '/gf-custom-javascript/' . $mofile;
+
+            if ( file_exists( $mofile_global ) ) {
+                // Look in global /wp-content/languages/gf-custom-javascript/ folder
+                // This way translations can be overridden via the /wp-content directory
+                load_textdomain( 'gf-custom-javascript', $mofile_global );
+            }
+            else if( file_exists( $mofile_local ) ) {
+                // Look in local /wp-content/plugins/gf-custom-javascript/languages/ folder
+                load_textdomain( 'gf-custom-javascript', $mofile_local );
+            }
+            else {
+                // Load the default language files
+                load_plugin_textdomain( 'gf-custom-javascript', false, $lang_dir );
+            }
+
+        }
+        
     }
 
     new Gravity_Forms_Custom_JavaScript();
+    
 }
 
 add_action( 'plugins_loaded', function() {
@@ -149,7 +189,7 @@ add_action( 'plugins_loaded', function() {
             ?>
 
             <div id="message" class="error notice is-dismissible">
-                <p>The Plugin <strong>Gravity Forms: Custom JavaScript on Submission</strong> requires <strong><a href = "http://www.gravityforms.com/" target="_blank">Gravity Forms</a></strong> to be Active!</p>
+                <p><?php __e( 'The Plugin <strong>Gravity Forms: Custom JavaScript on Submission</strong> requires <strong><a href = "http://www.gravityforms.com/" target="_blank">Gravity Forms</a></strong> to be Active!', 'gf-custom-javascript' ); ?></p>
             </div>
 
             <?php
