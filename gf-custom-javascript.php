@@ -21,6 +21,11 @@ if ( ( ! class_exists( 'Gravity_Forms_Custom_JavaScript' ) ) && ( class_exists( 
         protected $_path = 'gf-custom-javascript/gf-custom-javascript.php';
         protected $_full_path = __FILE__;
         
+        // These need to be defined un-translatable up here. Otherwise the text in the Sidebar of the Gravity Forms options doesn't show.
+        // That one instance of the String may sadly be un-translatable, but every other Instance will translate correctly.
+        protected $_title = 'Gravity Forms: Custom JavaScript on Submission';
+        protected $_short_title = 'Custom JavaScript';
+        
         // Members plugin integration
         protected $_capabilities = array( 'gravityforms_custom_javascript', 'gravityforms_custom_javascript_uninstall' );
 
