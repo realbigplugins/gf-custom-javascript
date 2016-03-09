@@ -13,13 +13,13 @@ if ( ( ! class_exists( 'Gravity_Forms_Custom_JavaScript' ) ) && ( class_exists( 
 
     class Gravity_Forms_Custom_JavaScript extends GFAddOn {
 
-        protected $_version = "0.1";
-        protected $_min_gravityforms_version = "1.7.9999";
-        protected $_slug = "gravity-forms-custom-javascript-submission";
-        protected $_path = "gravity-forms-custom-javascript-submission/gravity-forms-custom-javascript-submission.php";
+        protected $_version = '0.1';
+        protected $_min_gravityforms_version = '1.7.9999';
+        protected $_slug = 'gravity-forms-custom-javascript-submission';
+        protected $_path = 'gravity-forms-custom-javascript-submission/gravity-forms-custom-javascript-submission.php';
         protected $_full_path = __FILE__;
-        protected $_title = "Gravity Forms: Custom JavaScript on Submission";
-        protected $_short_title = "Custom JavaScript";
+        protected $_title = 'Gravity Forms: Custom JavaScript on Submission';
+        protected $_short_title = 'Custom JavaScript';
 
         public function init(){
             parent::init();
@@ -73,17 +73,17 @@ if ( ( ! class_exists( 'Gravity_Forms_Custom_JavaScript' ) ) && ( class_exists( 
         public function form_settings_fields( $form ) {
             return array(
                 array(
-                    "title"  => "Custom JavaScript on Form Submission",
-                    "fields" => array(
+                    'title'  => 'Custom JavaScript on Form Submission',
+                    'fields' => array(
                         array(
-                            "label"   => 'Custom JavaScript Specific to this Form.<br /><br />If using jQuery, <a href="https://learn.jquery.com/using-jquery-core/avoid-conflicts-other-libraries/#use-an-immediately-invoked-function-expression">be sure to put it in a immediately invoked function expression!</a>',
-                            "type"    => "textarea",
-                            "name"    => "gf_custom_javascript",
-                            "tooltip" => '&lt; script &gt; tags are not necessary.',
-                            "class"   => "medium mt-position-right"
+                            'label'   => 'Custom JavaScript Specific to this Form.<br /><br />If using jQuery, <a href="https://learn.jquery.com/using-jquery-core/avoid-conflicts-other-libraries/#use-an-immediately-invoked-function-expression">be sure to put it in a immediately invoked function expression!</a>',
+                            'type'    => 'textarea',
+                            'name'    => 'gf_custom_javascript',
+                            'tooltip' => '&lt; script &gt; tags are not necessary.',
+                            'class'   => 'medium mt-position-right',
                         ),
-                    )
-                )
+                    ),
+                ),
             );
         }
 
@@ -91,17 +91,17 @@ if ( ( ! class_exists( 'Gravity_Forms_Custom_JavaScript' ) ) && ( class_exists( 
         public function plugin_settings_fields() {
             return array(
                 array(
-                    "title"  => "Custom JavaScript on Form Submission",
-                    "fields" => array(
+                    'title'  => 'Custom JavaScript on Form Submission',
+                    'fields' => array(
                         array(
-                            "label"   => 'Custom JavaScript for Every Form.<br /><br />If using jQuery, <a href="https://learn.jquery.com/using-jquery-core/avoid-conflicts-other-libraries/#use-an-immediately-invoked-function-expression">be sure to put it in a immediately invoked function expression!</a>',
-                            "type"    => "textarea",
-                            "name"    => "gf_custom_javascript",
-                            "tooltip" => '&lt; script &gt; tags are not necessary.',
-                            "class"   => "medium mt-position-right"
+                            'label'   => 'Custom JavaScript for Every Form.<br /><br />If using jQuery, <a href="https://learn.jquery.com/using-jquery-core/avoid-conflicts-other-libraries/#use-an-immediately-invoked-function-expression">be sure to put it in a immediately invoked function expression!</a>',
+                            'type'    => 'textarea',
+                            'name'    => 'gf_custom_javascript',
+                            'tooltip' => '&lt; script &gt; tags are not necessary.',
+                            'class'   => 'medium mt-position-right',
                         ),
-                    )
-                )
+                    ),
+                ),
             );
         }
     }
