@@ -21,6 +21,14 @@ if ( ( ! class_exists( 'Gravity_Forms_Custom_JavaScript' ) ) && ( class_exists( 
         protected $_full_path = __FILE__;
         protected $_title = 'Gravity Forms: Custom JavaScript on Submission';
         protected $_short_title = 'Custom JavaScript';
+        
+        // Members plugin integration
+        protected $_capabilities = array( 'gravityforms_custom_javascript', 'gravityforms_custom_javascript_uninstall' );
+
+        // Permissions
+        protected $_capabilities_settings_page = 'gravityforms_custom_javascript';
+        protected $_capabilities_form_settings = 'gravityforms_custom_javascript';
+        protected $_capabilities_uninstall = 'gravityforms_custom_javascript_uninstall';
 
         public function init(){
             parent::init();
