@@ -3,6 +3,7 @@
 Plugin Name: Gravity Forms: Custom JavaScript on Submission
 Description: This plugin injects custom JavaScript on gform_after_submission per form or globally
 Author: Eric Defore
+Author URI: http://realbigplugins.com
 Version: 0.1
 License: GPL2
 */
@@ -15,8 +16,8 @@ if ( ( ! class_exists( 'Gravity_Forms_Custom_JavaScript' ) ) && ( class_exists( 
 
         protected $_version = '0.1';
         protected $_min_gravityforms_version = '1.7.9999';
-        protected $_slug = 'gravity-forms-custom-javascript-submission';
-        protected $_path = 'gravity-forms-custom-javascript-submission/gravity-forms-custom-javascript-submission.php';
+        protected $_slug = 'gf-custom-javascript';
+        protected $_path = 'gf-custom-javascript/gf-custom-javascript.php';
         protected $_full_path = __FILE__;
         protected $_title = 'Gravity Forms: Custom JavaScript on Submission';
         protected $_short_title = 'Custom JavaScript';
