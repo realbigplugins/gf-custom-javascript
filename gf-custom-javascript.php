@@ -35,10 +35,28 @@ if ( ( ! class_exists( 'Gravity_Forms_Custom_JavaScript' ) ) && ( class_exists( 
             // Global
             $plugin_settings = $this->get_plugin_settings( $form );
             
-            if ( ( $form_settings ) && ( $form_settings['gf_custom_javascript'] !== '' ) ) {
+            if ( ( $form_settings ) && ( $form_settings['gf_custom_javascript'] !== '' ) && ( $form_settings['gf_custom_javascript'] !== null ) ) {
+                
+                // If external JavaScript files have been defined, they will be placed after the main Script
+                $has_external_scripts = preg_match_all( '/\<script\s(?:.+)?src="([^"]+)"\>+/i', $form_settings['gf_custom_javascript'], $scripts );
                 
                 // If they included <script> tags, remove them
                 $form_settings['gf_custom_javascript'] = preg_replace( '/\<\/?script(.*?)\>+/', '', $form_settings['gf_custom_javascript'] );
+                
+                // If custom HTML has been included
+                $has_custom_html = preg_match_all( '/\<(.*?)\>+/', $form_settings['gf_custom_javascript'], $html_tags );
+                
+                if ( $has_custom_html > 0 ) {
+                    
+                    // Match full string
+                    foreach ( $html_tags[0] as $html ) {
+                        echo $html;
+                    }
+                    
+                }
+                
+                // Now we can remove any custom HTML from the JavaScript output
+                $form_settings['gf_custom_javascript'] = preg_replace( '/\<(.*?)\>+/', '', $form_settings['gf_custom_javascript'] );
                 
                 ?>
 
@@ -49,12 +67,44 @@ if ( ( ! class_exists( 'Gravity_Forms_Custom_JavaScript' ) ) && ( class_exists( 
                 </script>
 
                 <?php
+                
+                if ( $has_external_scripts > 0 ) {
+                    
+                    // Match first sub-pattern
+                    foreach ( $scripts[1] as $script ) {
+                        ?>
+                        
+                        <script type = "text/javascript" src="<?php echo $script; ?>"></script>
+
+                        <?php
+                    }
+                    
+                }
+                
             }
             
-            if ( ( $plugin_settings ) && ( $plugin_settings['gf_custom_javascript'] !== '' ) ) {
+            if ( ( $plugin_settings ) && ( $plugin_settings['gf_custom_javascript'] !== '' ) && ( $plugin_settings['gf_custom_javascript'] !== null ) ) {
+                
+                // If external JavaScript files have been defined, they will be placed after the main Script
+                $has_external_scripts = preg_match_all( '/\<script\s(?:.+)?src="([^"]+)"\>+/i', $plugin_settings['gf_custom_javascript'], $scripts );
                 
                 // If they included <script> tags, remove them
                 $plugin_settings['gf_custom_javascript'] = preg_replace( '/\<\/?script(.*?)\>+/', '', $plugin_settings['gf_custom_javascript'] );
+                
+                // If custom HTML has been included
+                $has_custom_html = preg_match_all( '/\<(.*?)\>+/', $plugin_settings['gf_custom_javascript'], $html_tags );
+                
+                if ( $has_custom_html > 0 ) {
+                    
+                    // Match full string
+                    foreach ( $html_tags[0] as $html ) {
+                        echo $html;
+                    }
+                    
+                }
+                
+                // Now we can remove any custom HTML from the JavaScript output
+                $plugin_settings['gf_custom_javascript'] = preg_replace( '/\<(.*?)\>+/', '', $plugin_settings['gf_custom_javascript'] );
                 
                 ?>
 
@@ -65,6 +115,20 @@ if ( ( ! class_exists( 'Gravity_Forms_Custom_JavaScript' ) ) && ( class_exists( 
                 </script>
 
                 <?php
+                
+                if ( $has_external_scripts > 0 ) {
+                    
+                    // Match first sub-pattern
+                    foreach ( $scripts[1] as $script ) {
+                        ?>
+                        
+                        <script type = "text/javascript" src="<?php echo $script; ?>"></script>
+
+                        <?php
+                    }
+                    
+                }
+                
             }
             
         }
