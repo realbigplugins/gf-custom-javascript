@@ -43,12 +43,12 @@ if ( ( ! class_exists( 'Gravity_Forms_Custom_JavaScript' ) ) && ( class_exists( 
             // Global
             $plugin_settings = $this->get_plugin_settings();
             
-            $this->clean_script( $form_settings );
-            $this->clean_script( $plugin_settings );
+            $this->clean_script( $form_settings, 'This script only runs on this Form' );
+            $this->clean_script( $plugin_settings, 'This script runs on every Form' );
             
         }
         
-        private function clean_script( $settings ) {
+        private function clean_script( $settings, $message ) {
             
             if ( ( $settings ) && ( $settings['gf_custom_javascript'] !== '' ) && ( $settings['gf_custom_javascript'] !== null ) ) {
                 
@@ -77,7 +77,7 @@ if ( ( ! class_exists( 'Gravity_Forms_Custom_JavaScript' ) ) && ( class_exists( 
 
                 <script type = "text/javascript">
                     // Gravity Forms: Custom JavaScript on Submission
-                    // This script only runs on this Form
+                    // <?php echo "$message\n" ?>
                     <?php echo $settings['gf_custom_javascript']; ?>
                 </script>
 
